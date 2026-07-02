@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "faceforge"
+version = "0.1.0"
+description = "Modular face detection and recognition toolkit with GPU and Colab support."
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+  { name = "Developer6316" }
+]
+license = { text = "MIT" }
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,12 @@
+numpy>=1.23
+opencv-python>=4.7
+torch>=2.0
+torchvision>=0.15
+facenet-pytorch>=2.5
+mtcnn>=0.1.1
+tqdm
+pytest
+scikit-learn
+faiss-cpu
+matplotlib
+pillow

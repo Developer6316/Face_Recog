@@ -1,0 +1,12 @@
+# Docker compose to run demo (optional)
+version: '3.8'
+services:
+  faceforge:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.gpu
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    devices:
+      - /dev/video0:/dev/video0
