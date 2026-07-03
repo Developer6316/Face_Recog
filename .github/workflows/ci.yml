@@ -24,22 +24,10 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip setuptools wheel
-          # install pytest for running tests
-          python -m pip install pytest
-          # install package in editable mode so tests import local src/faceforge
+          python -m pip install pytest numpy opencv-python scikit-learn matplotlib pillow tqdm
           python -m pip install -e .
-          # install a trimmed set of requirements to avoid heavy/OS-dependent packages in CI
-          if [ -f requirements.txt ]; then
-            # exclude heavy or problematic packages for CI:
-            # facenet-pytorch, torch, torchvision, faiss-cpu, mtcnn
-            grep -E -v '^(facenet-pytorch|torch|torchvision|faiss-cpu|mtcnn)' requirements.txt > /tmp/ci-requirements.txt || true
-            if [ -s /tmp/ci-requirements.txt ]; then
-              python -m pip install -r /tmp/ci-requirements.txt
-            fi
-          fi
-          # Make sure facenet-pytorch is not installed so tests expecting its absence pass
-          python -m pip uninstall -y facenet-pytorch || true
+          # Uninstall heavy packages to avoid CI timeouts
+          python -m pip uninstall -y torch torchvision facenet-pytorch mtcnn faiss-cpu || true
 
       - name: Run tests
-        run: |
-          pytest -q
+        run: pytest -v
